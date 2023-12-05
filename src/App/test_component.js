@@ -18,7 +18,7 @@ export default function ProductUsers(props){
 
     return <div className="showcase">
         {data.map(p=>{
-            return <div key={p} className="element" style={{
+            return <div key={p.name} className="element" style={{
                 backgroundImage:`url(data:image/png;base64,${p.image})`
             }} title={p.name+' (Дата выхода:'+p.year_issue+')'}>
                 <span className='price'>{p.price+' р.'}</span>

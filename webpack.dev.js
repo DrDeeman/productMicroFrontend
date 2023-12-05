@@ -12,7 +12,7 @@ module.exports = merge(config, {
     historyApiFallback: true,
     proxy: {
       '/app/*': {
-        target: 'http://[::1]:8090/app',
+        target: 'http://[::1]:8087/app',
         pathRewrite: { '^/app': '' },
         changeOrigin: true,
       },

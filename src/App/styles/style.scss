@@ -7,6 +7,7 @@
     padding-top:0px;
 
     .element{
+        max-width: 220px;
         width:30%;
         height:300px;
         border:1px solid black;
@@ -35,6 +36,7 @@
         .price{
           left:0px;
           background-color:black;
+          width:auto;
         }
     }
 }
