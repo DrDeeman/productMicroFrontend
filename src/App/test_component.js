@@ -1,10 +1,29 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
+import './styles/style.scss';
 
 export default function ProductUsers(props){
 
-    return <div style={{display:'flex', flexWrap:'wrap',width:'100%',height:'100%',paddingTop:'100px'}}>
-        {['test2','test3','test4','test5','test6','test7','test8'].map(p=>{
-            return <div key={p} style={{width:'30%', height:'300px', border:'1px solid black', borderRadius:'5px', margin:'10px'}}>{p}</div>
+    const [data, setData] = useState([]);
+
+     useEffect(()=>{
+        fetch('/app/products/',{
+            method:"GET",
+            headers:{
+                "accept":'application/json'
+            }
+        })
+        .then(responce=>responce.json())
+        .then(result=>setData(result))
+     },[]);
+
+    return <div className="showcase">
+        {data.map(p=>{
+            return <div key={p} className="element" style={{
+                backgroundImage:`url(data:image/png;base64,${p.image})`
+            }} title={p.name+' (Дата выхода:'+p.year_issue+')'}>
+                <span className='price'>{p.price+' р.'}</span>
+                <span className='raiting' style={{backgroundColor:(p.raiting>4.0?'green':'red')}}>{p.raiting} &#10026;</span>
+            </div>
         })}
     </div>
 }

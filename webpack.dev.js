@@ -11,7 +11,11 @@ module.exports = merge(config, {
     port: 3002,
     historyApiFallback: true,
     proxy: {
-      
+      '/app/*': {
+        target: 'http://[::1]:8090/app',
+        pathRewrite: { '^/app': '' },
+        changeOrigin: true,
+      },
     },
   },
   plugins: [
@@ -22,8 +26,8 @@ module.exports = merge(config, {
         './ProductUsers': './src/App/test_component.js',
       },
       remotes: {
-       'host': 'users@http://localhost:3001/remoteUsers.js'
-      //'host': remoteConfig('users','"http://localhost:3001/remoteUsers.js"')
+       //'host': 'users@http://localhost:3001/remoteUsers.js'
+      'host': remoteConfig('users','"http://localhost:3001/remoteUsers.js"')
       }
     })
   ],

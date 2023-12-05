@@ -5,23 +5,31 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: path.join(__dirname, 'src/index.js')
+    app: path.join(__dirname, 'src/app.js')
   },
   output: {
     filename: '[name].js',
     assetModuleFilename: 'assets/images/[name][ext]',
-    path: path.join(__dirname, '/dist'), ///var/www/sapi/public/CoreSite
+    path: path.join(__dirname, '/dist'),
     asyncChunks: true,
     publicPath:'http://localhost:3002/'
   },
+  optimization: {
+    splitChunks: {
+      name: 'other',
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'trekerserver',
+      title: 'project',
       template: path.join(__dirname, 'src/index.html'),
       filename: 'index.html',
       inject: false,
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    })
   ],
   module: {
     rules: [

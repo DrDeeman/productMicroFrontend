@@ -1,0 +1,40 @@
+
+.showcase{
+    display:flex;
+    flex-wrap:wrap;
+    width:100%;
+    height:100%;
+    padding-top:0px;
+
+    .element{
+        width:30%;
+        height:300px;
+        border:1px solid black;
+        border-radius:5px;
+        margin:10px;
+        background-repeat:no-repeat;
+        background-size:100% 100%;
+        position:relative;
+
+        .raiting, .price{
+            border:1px solid black;
+            border-radius:5px;
+            width:50px;
+            height:20px;
+            position:absolute;
+            bottom:0px;
+            margin:5px;
+            text-align:center;
+            color:white;
+        }
+
+        .raiting{
+            right:0px;
+        }
+
+        .price{
+          left:0px;
+          background-color:black;
+        }
+    }
+}
