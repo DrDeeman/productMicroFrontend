@@ -6,7 +6,7 @@ export default function ProductUsers(props){
     const [data, setData] = useState([]);
 
      useEffect(()=>{
-        fetch('/app/products/',{
+        fetch('/products_api/products/',{
             method:"GET",
             headers:{
                 "accept":'application/json'

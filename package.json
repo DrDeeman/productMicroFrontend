@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --config=webpack.dev.js",
     "prod": "webpack --config=webpack.prod.js",
+    "prod_server": "webpack --config=webpack.prod_server.js",
     "start": "webpack-dev-server --config=webpack.dev.js",
     "prettier": "prettier  --write ."
   },

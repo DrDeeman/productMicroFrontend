@@ -9,16 +9,17 @@ module.exports = {
     app: path.join(__dirname, 'src/app.js')
   },
   output: {
-    filename: '[name].js',
+    filename: 'scripts/[name].js',
     assetModuleFilename: 'assets/images/[name][ext]',
     path: path.join(__dirname, '/dist'),
-    asyncChunks: true,
-    publicPath:'http://localhost:3002/'
+    asyncChunks: true
   },
   optimization: {
-    splitChunks: {
-      name: 'other',
-    },
+    splitChunks: false,
+    runtimeChunk: false
+  },
+  experiments:{
+    topLevelAwait: true
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -27,10 +28,7 @@ module.exports = {
       filename: 'index.html',
       inject: false,
     }),
-    new CleanWebpackPlugin(),
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1,
-    })
+    new CleanWebpackPlugin()
   ],
   module: {
     rules: [
@@ -47,7 +45,7 @@ module.exports = {
       },
       {
         test: /.(png|jpg|jpeg)/,
-        type:'asset/resource'
+        type:'asset'
       },
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,

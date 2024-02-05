@@ -6,17 +6,27 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 
 module.exports = merge(config, {
   mode: 'development',
+  output:{
+    publicPath:'http://localhost:3002/'
+  },
   devServer: {
     //static:path.join(__dirname,"dist"),
     port: 3002,
     historyApiFallback: true,
+    
     proxy: {
-      '/app/*': {
-        target: 'http://[::1]:8087/app',
-        pathRewrite: { '^/app': '' },
+      '/products_api/*': {
+        target: 'http://[::1]:8061/',
+       // pathRewrite: { '^/products_api': '' },
+        changeOrigin: true,
+      },
+      '/users_api/*': {
+        target: 'http://[::1]:8091/',
+      //  pathRewrite: { '^/users_api': '' },
         changeOrigin: true,
       },
     },
+    
   },
   plugins: [
     new ModuleFederationPlugin({
@@ -28,6 +38,10 @@ module.exports = merge(config, {
       remotes: {
        //'host': 'users@http://localhost:3001/remoteUsers.js'
       'host': remoteConfig('users','"http://localhost:3001/remoteUsers.js"')
+      },
+      shared:{
+        'react':{singleton: true, strictVersion: false, eager: true, requiredVersion:'^18.0.0'},
+        'react-dom':{singleton: true, strictVersion: false, eager: true,requiredVersion:'^18.0.0'},
       }
     })
   ],
@@ -52,7 +66,7 @@ function remoteConfig(name,url){
           try {
             
             return window.${name}.init(arg)
-          } catch(e) {
+          } catch(ev) {
             console.log('remote container already initialized')
           }
         }

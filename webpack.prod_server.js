@@ -2,12 +2,11 @@ const { merge } = require('webpack-merge');
 const config = require('./webpack.config.js');
 const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-const { dependencies } = require('webpack');
 
 module.exports = merge(config, {
   mode: 'production',
   output:{
-    publicPath:'http://localhost:8061/products_api/'
+    publicPath:'http://127.0.0.1:8050/products_api/'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -16,14 +15,11 @@ module.exports = merge(config, {
     new ModuleFederationPlugin({
       name: 'product_users',
       filename: 'remoteProduct.js',
-     // library:{type:"var",name:"product_users"},
-      //remoteType:'var',
       exposes: {
         './ProductUsers': './src/App/test_component.js',
       },
       remotes: {
-       'host': 'users@http://localhost:8200/users_api/remoteUsers.js'
-       //'host':'users'
+       'host': 'users@http://127.0.0.1:8050/users_api/remoteUsers.js'
       },
       shared:{
         'react':{singleton: true, strictVersion: false, eager: true, requiredVersion:'^18.0.0'},
