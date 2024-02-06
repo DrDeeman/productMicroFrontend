@@ -22,7 +22,7 @@ module.exports = merge(config, {
         './ProductUsers': './src/App/test_component.js',
       },
       remotes: {
-       'host': 'users@http://localhost:8200/users_api/remoteUsers.js'
+       'host': 'user@http://localhost:8200/users_api/remoteUsers.js'
        //'host':'users'
       },
       shared:{

@@ -6,7 +6,7 @@ const Users = React.lazy(()=>import('host/Users'));
 export default function(props){
 
 
-    return <div>
+    return (
         <Suspense fallback={<div>load...</div>}>
         <ErrorBoundary fallback={<img src={icon} style={{width:'50px', height:'50px', border:'1px solid black', borderRadius:'50%', 
    backgroundColor:'white',
@@ -14,6 +14,7 @@ export default function(props){
             <Users/>
             </ErrorBoundary>
         </Suspense>
-        </div>
+    )
+        
     
 }

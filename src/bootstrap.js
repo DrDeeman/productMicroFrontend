@@ -6,7 +6,7 @@ import Test from './App/test_component';
 
 ReactDOM.createRoot(document.querySelector('#root')).render(
 <div>
-<Test/>
 <Remote/>
+<Test/>
 </div>
 );
